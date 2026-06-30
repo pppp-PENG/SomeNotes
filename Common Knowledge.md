@@ -28,5 +28,21 @@ vim ~/.condarc # 然后修改 channels
 
 '''离线克隆环境'''
 conda create -p /path/to/new_env --clone /path/to/old_env --offline --copy
+
+'''离线打包克隆环境'''
+# src server
+pip install conda-pack
+conda pack -p /path/to/envs/src_env -o src_env.tar.gz
+scp src_env.tar.gz user@target_server:/path/to/target_dir
+# target server
+mkdir -p /path/to/envs/target_env
+tar -xzf /path/to/target_dir/src_env.tar.gz -C /path/to/envs/target_env
+/path/to/envs/target_env/bin/conda-unpack
 ```
 
+### 2. 简单的数据处理
+```bash
+'''比较两文件之间的差异'''
+diff -u file1.txt file2.txt # 统一格式
+diff -y file1.txt file2.txt # 并排
+```
